@@ -30,9 +30,9 @@ class UserController extends Controller
     public function add(Request $request)
     {
         $rules = [
-            'username' => 'required|max:20',
+            'name'     => 'required|max:50',  // Use 'name' instead of 'username'
+            'email'    => 'required|email|unique:tbluser,email', // Validate email
             'password' => 'required|max:20',
-            'gender'   => 'required|in:Male,Female',
         ];
 
         $this->validate($request, $rules);
@@ -51,9 +51,9 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         $rules = [
-            'username' => 'max:20',
+            'name'     => 'max:50',  // Use 'name' instead of 'username'
+            'email'    => 'email|unique:tbluser,email,' . $id, // Validate email
             'password' => 'max:20',
-            'gender'   => 'in:Male,Female',
         ];
 
         $this->validate($request, $rules);
